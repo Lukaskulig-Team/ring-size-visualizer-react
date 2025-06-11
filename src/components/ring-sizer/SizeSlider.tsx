@@ -28,31 +28,26 @@ const SizeSlider = ({ value, onChange, min, max, label, unit }: SizeSliderProps)
           step={0.01}
           value={value}
           onChange={(e) => onChange(parseFloat(e.target.value))}
-          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer 
+                     [&::-webkit-slider-thumb]:appearance-none 
+                     [&::-webkit-slider-thumb]:h-5 
+                     [&::-webkit-slider-thumb]:w-5 
+                     [&::-webkit-slider-thumb]:rounded-full 
+                     [&::-webkit-slider-thumb]:bg-blue-500 
+                     [&::-webkit-slider-thumb]:border-2 
+                     [&::-webkit-slider-thumb]:border-white 
+                     [&::-webkit-slider-thumb]:shadow-md 
+                     [&::-webkit-slider-thumb]:cursor-pointer
+                     [&::-moz-range-thumb]:h-5 
+                     [&::-moz-range-thumb]:w-5 
+                     [&::-moz-range-thumb]:rounded-full 
+                     [&::-moz-range-thumb]:bg-blue-500 
+                     [&::-moz-range-thumb]:border-2 
+                     [&::-moz-range-thumb]:border-white 
+                     [&::-moz-range-thumb]:shadow-md 
+                     [&::-moz-range-thumb]:cursor-pointer
+                     [&::-moz-range-thumb]:border-none"
         />
-        
-        <style jsx>{`
-          .slider::-webkit-slider-thumb {
-            appearance: none;
-            height: 20px;
-            width: 20px;
-            border-radius: 50%;
-            background: #3b82f6;
-            border: 2px solid #ffffff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-          }
-          
-          .slider::-moz-range-thumb {
-            height: 20px;
-            width: 20px;
-            border-radius: 50%;
-            background: #3b82f6;
-            border: 2px solid #ffffff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-          }
-        `}</style>
       </div>
       
       <div className="flex justify-between text-xs text-gray-500">
