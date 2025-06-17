@@ -1,5 +1,4 @@
-
-import React, { createContext, useContext, ReactNode } from 'react';
+import React, { createContext, useContext, ReactNode, useState, useEffect } from 'react';
 
 interface Translations {
   [key: string]: string;
@@ -68,10 +67,65 @@ const translations: Record<'ar' | 'fr', Translations> = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+const detectLanguage = (): 'ar' | 'fr' => {
+  // Check URL pathname
+  if (window.location.pathname.endsWith('/fr')) {
+    return 'fr';
+  }
+  
+  // Check URL search params
+  const urlParams = new URLSearchParams(window.location.search);
+  const langParam = urlParams.get('lang') || urlParams.get('language');
+  if (langParam === 'fr' || langParam === 'french') {
+    return 'fr';
+  }
+  
+  // Check URL hash
+  const hash = window.location.hash;
+  if (hash.includes('fr') || hash.includes('french')) {
+    return 'fr';
+  }
+  
+  // Default to Arabic
+  return 'ar';
+};
+
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  // Detect language from URL - check if it ends with /fr
-  const language: 'ar' | 'fr' = window.location.pathname.endsWith('/fr') ? 'fr' : 'ar';
+  const [language, setLanguage] = useState<'ar' | 'fr'>(detectLanguage);
   const isRTL = language === 'ar';
+
+  useEffect(() => {
+    const handleLanguageChange = () => {
+      const newLanguage = detectLanguage();
+      console.log('Language detection:', newLanguage, 'URL:', window.location.href);
+      setLanguage(newLanguage);
+    };
+
+    // Listen for popstate events (back/forward navigation)
+    window.addEventListener('popstate', handleLanguageChange);
+    
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleLanguageChange);
+    
+    // Listen for messages from parent window (for iframe communication)
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data && event.data.type === 'LANGUAGE_CHANGE') {
+        console.log('Received language change message:', event.data.language);
+        setLanguage(event.data.language === 'fr' ? 'fr' : 'ar');
+      }
+    };
+    window.addEventListener('message', handleMessage);
+
+    // Poll for URL changes (fallback for iframe scenarios)
+    const pollInterval = setInterval(handleLanguageChange, 1000);
+
+    return () => {
+      window.removeEventListener('popstate', handleLanguageChange);
+      window.removeEventListener('hashchange', handleLanguageChange);
+      window.removeEventListener('message', handleMessage);
+      clearInterval(pollInterval);
+    };
+  }, []);
 
   const t = (key: string): string => {
     return translations[language][key] || key;
