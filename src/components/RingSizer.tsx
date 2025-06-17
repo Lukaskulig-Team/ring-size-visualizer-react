@@ -31,7 +31,7 @@ const RingSizer = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white">
+    <div className="max-w-4xl mx-auto p-6" style={{ backgroundColor: '#f4f3ea' }}>
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('ring.sizer')}</h1>
         <p className="text-gray-600">{t('ring.sizer.description')}</p>
@@ -45,9 +45,10 @@ const RingSizer = () => {
             onClick={() => setActiveTab(tab.id)}
             className={`px-6 py-3 font-medium text-sm transition-colors duration-200 border-b-2 ${
               activeTab === tab.id
-                ? 'border-blue-500 text-blue-600'
+                ? 'text-gray-900 border-b-2'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
             }`}
+            style={activeTab === tab.id ? { borderBottomColor: '#D4AF37' } : {}}
           >
             {tab.label}
           </button>

@@ -27,14 +27,19 @@ const WithFingerTab = () => {
       <MillimeterGrid className="h-96 mx-auto max-w-2xl">
         <div className="absolute inset-0 flex items-center justify-center">
           <div
-            className="bg-blue-500 bg-opacity-20 border-t-2 border-b-2 border-blue-500 transition-all duration-300 ease-in-out"
+            className="bg-opacity-20 border-t-2 border-b-2 transition-all duration-300 ease-in-out"
             style={{
               width: '100%',
               height: `${mmToPx(width)}px`,
+              borderColor: '#D4AF37',
+              backgroundColor: '#D4AF37'
             }}
           >
             {/* Center line */}
-            <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-blue-500 transform -translate-y-1/2" />
+            <div 
+              className="absolute top-1/2 left-0 right-0 h-0.5 transform -translate-y-1/2" 
+              style={{ backgroundColor: '#D4AF37' }}
+            />
           </div>
         </div>
 
