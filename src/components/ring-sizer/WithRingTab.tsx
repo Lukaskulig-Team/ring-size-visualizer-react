@@ -1,10 +1,12 @@
 
 import React, { useState } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 import MillimeterGrid from './MillimeterGrid';
 import SizeSlider from './SizeSlider';
 
 const WithRingTab = () => {
   const [diameter, setDiameter] = useState<number>(17.27); // Average ring size
+  const { t } = useLanguage();
 
   // Convert mm to pixels (assuming 96 DPI)
   const mmToPx = (mm: number) => mm * 3.78;
@@ -17,7 +19,7 @@ const WithRingTab = () => {
           onChange={setDiameter}
           min={9.91}
           max={24.64}
-          label="Ring Diameter"
+          label={t('ring.diameter')}
           unit="mm"
         />
       </div>
@@ -39,14 +41,14 @@ const WithRingTab = () => {
         {/* Measurement labels */}
         <div className="absolute top-4 left-4 bg-white bg-opacity-90 p-2 rounded shadow-sm">
           <div className="text-xs text-gray-600">
-            <div>Diameter: {diameter.toFixed(2)} mm</div>
-            <div>Circumference: {(diameter * Math.PI).toFixed(2)} mm</div>
+            <div>{t('diameter')}: {diameter.toFixed(2)} mm</div>
+            <div>{t('circumference')}: {(diameter * Math.PI).toFixed(2)} mm</div>
           </div>
         </div>
       </MillimeterGrid>
 
       <div className="text-center text-sm text-gray-600 max-w-md mx-auto">
-        <p>Place an existing ring over the circle above. Adjust the diameter until the circle matches your ring's inner diameter.</p>
+        <p>{t('with.ring.instruction')}</p>
       </div>
     </div>
   );

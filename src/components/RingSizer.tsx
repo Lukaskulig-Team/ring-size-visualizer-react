@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 import WithRingTab from './ring-sizer/WithRingTab';
 import WithFingerTab from './ring-sizer/WithFingerTab';
 import OfflineTab from './ring-sizer/OfflineTab';
@@ -8,11 +9,12 @@ type TabType = 'ring' | 'finger' | 'offline';
 
 const RingSizer = () => {
   const [activeTab, setActiveTab] = useState<TabType>('ring');
+  const { t } = useLanguage();
 
   const tabs = [
-    { id: 'ring' as TabType, label: 'With a Ring' },
-    { id: 'finger' as TabType, label: 'With a Finger' },
-    { id: 'offline' as TabType, label: 'Offline' },
+    { id: 'ring' as TabType, label: t('tab.with.ring') },
+    { id: 'finger' as TabType, label: t('tab.with.finger') },
+    { id: 'offline' as TabType, label: t('tab.offline') },
   ];
 
   const renderTabContent = () => {
@@ -31,8 +33,8 @@ const RingSizer = () => {
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Ring Sizer</h1>
-        <p className="text-gray-600">Find your perfect ring size with our precise measurement tools</p>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('ring.sizer')}</h1>
+        <p className="text-gray-600">{t('ring.sizer.description')}</p>
       </div>
 
       {/* Tab Navigation */}
