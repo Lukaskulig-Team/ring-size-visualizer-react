@@ -50,14 +50,16 @@ const SizeSlider = ({ value, onChange, min, max, label, unit }: SizeSliderProps)
             '--moz-range-thumb-bg': '#D4AF37',
           } as React.CSSProperties}
         />
-        <style jsx>{`
-          input[type="range"]::-webkit-slider-thumb {
-            background-color: #D4AF37;
-          }
-          input[type="range"]::-moz-range-thumb {
-            background-color: #D4AF37;
-          }
-        `}</style>
+        <style>
+          {`
+            input[type="range"]::-webkit-slider-thumb {
+              background-color: #D4AF37;
+            }
+            input[type="range"]::-moz-range-thumb {
+              background-color: #D4AF37;
+            }
+          `}
+        </style>
       </div>
       
       <div className="flex justify-between text-xs text-gray-500">

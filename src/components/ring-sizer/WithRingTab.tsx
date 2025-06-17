@@ -27,12 +27,11 @@ const WithRingTab = () => {
       <MillimeterGrid className="h-96 mx-auto max-w-2xl">
         <div className="absolute inset-0 flex items-center justify-center">
           <div
-            className="border-2 rounded-full bg-opacity-30 transition-all duration-300 ease-in-out"
+            className="border-2 rounded-full transition-all duration-300 ease-in-out"
             style={{
               width: `${mmToPx(diameter)}px`,
               height: `${mmToPx(diameter)}px`,
-              borderColor: '#D4AF37',
-              backgroundColor: '#D4AF37'
+              borderColor: '#D4AF37'
             }}
           >
             {/* Ring center dot */}
